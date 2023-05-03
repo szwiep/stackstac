@@ -35,7 +35,7 @@ def stack(
     bounds: Optional[Bbox] = None,
     bounds_latlon: Optional[Bbox] = None,
     snap_bounds: bool = True,
-    resampling: Resampling = Resampling.nearest,
+    resampling: Union[Resampling, str] = Resampling.nearest,
     chunksize: ChunksParam = 1024,
     dtype: np.dtype = np.dtype("float64"),
     fill_value: Union[int, float] = np.nan,
@@ -166,7 +166,8 @@ def stack(
         `target-align pixels <https://gis.stackexchange.com/questions/165402/how-to-use-tap-in-gdal-rasterize>`_
         argument in GDAL.
     resampling:
-        The rasterio resampling method to use when reprojecting or rescaling data to a different CRS or resolution.
+        The rasterio resampling method to use when reprojecting or rescaling data to a different CRS or resolution. 
+        Either a specific enum instance of rasterio.enums.Resampling or a str to index into rasterio.enums.Resampling.
         Default: ``rasterio.enums.Resampling.nearest``.
     chunksize:
         The chunksize to use for the Dask array. Default: 1024. Picking a good chunksize will
