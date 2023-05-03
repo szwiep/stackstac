@@ -284,6 +284,12 @@ def stack(
             reverse=sortby_date == "desc",
         )
 
+    if isinstance(resampling, str):
+        try:
+            resampling = Resampling[resampling]
+        except KeyError:
+            raise ValueError(...) from None
+        
     asset_table, spec, asset_ids, plain_items = prepare_items(
         plain_items,
         assets=assets,
